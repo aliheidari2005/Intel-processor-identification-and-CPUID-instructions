@@ -26,18 +26,12 @@ Extended Features: Supports extended functions like Processor Brand String, Phys
 
 Example Output
 
-Here is a sample output from running the tools on an Intel Core i5 processor:
+Here is a sample output from running the tools on an Intel Core i7 processor:
 
 1. Cache Hierarchy Analysis (./leaf_04_cache)
 
 --- CPUID (EAX=4, ECX=0) ---
 EAX: 0x1C004121 (Type: Data, Level: 1, Cores: 8)
-EBX: 0x01C0003F (LineSize: 64, Ways: 8)
-ECX: 0x0000003F (Sets: 64)
-Calculated Size: 32 KB
-
---- CPUID (EAX=4, ECX=1) ---
-EAX: 0x1C004122 (Type: Instruction, Level: 1, Cores: 8)
 EBX: 0x01C0003F (LineSize: 64, Ways: 8)
 ECX: 0x0000003F (Sets: 64)
 Calculated Size: 32 KB
@@ -61,10 +55,10 @@ x2APIC ID:            0x00000003
 
 📂 Repository Structure
 
-The project follows a Separation of Concerns principle, where each hardware feature is handled by a dedicated source file:
+The project follows a Separation of Concerns principle. The directory structure below is organized using professional naming conventions for clarity:
 
 x86-cpuid-project/
-├── src/                          # Source Code
+├── src/                          # Source Code (Assembly Modules)
 │   ├── check_cpuid_support.asm   # EFLAGS verification
 │   ├── leaf_00_vendor.asm        # Vendor ID (GenuineIntel)
 │   ├── leaf_01_features.asm      # Standard Features
@@ -82,12 +76,12 @@ x86-cpuid-project/
 │   └── util_real_freq.asm        # Frequency Utility
 │
 ├── docs/                         # Documentation
-│   ├── Intel_App_Note_485.pdf
-│   └── Project_Presentation.pdf
+│   ├── Intel_App_Note_485.pdf    # Official Datasheet
+│   └── Project_Presentation.pdf  # Presentation Slides
 │
-├── bin/                          # Executables (Created after build)
-├── build.sh                      # Automated Build Script
-└── README.md                     # Project Documentation
+├── bin/                          # Executables (Auto-generated)
+├── build.sh                      # Automation Build Script
+└── README.md                     # This Document
 
 
 🛠️ Prerequisites
@@ -108,7 +102,22 @@ sudo apt install nasm gcc gcc-multilib
 
 📦 How to Build & Run
 
-Manual Compilation
+Option 1: Automated Build (Recommended)
+
+You can compile all modules at once using the provided script:
+
+# 1. Make the script executable
+chmod +x build.sh
+
+# 2. Run the build script
+./build.sh
+
+# 3. Run any tool from the bin folder
+./bin/leaf_04_cache
+./bin/leaf_0B_topology
+
+
+Option 2: Manual Compilation
 
 If you want to compile a specific module manually (e.g., the Cache Detector):
 
@@ -130,4 +139,4 @@ Intel® Application Note 485: Processor Identification and the CPUID Instruction
 
 👨‍💻 Author
 
-Developed by [Ali Heidari] as a research project on x86 System Architecture and Low-level Programming.
+Developed by [Your Name] as a research project on x86 System Architecture and Low-level Programming.
